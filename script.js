@@ -1,10 +1,10 @@
 //Grab access to body element
 const pokeball = document.getElementById("pokeballImage")
 const pokeballDiv = document.getElementById("pokeballDiv")
-const classToAdd = document.querySelector(".ballAnimation")
+const classToAdd = document.querySelector("#pokeballImage.ballAnimation")
 window.addEventListener("load", () => {
     pokeball.style.top = window.innerHeight / 2 + 100
-    pokeball.classList.toggle("ballAnimation")
+    pokeball.classList.toggle("ballAnimationIn")
 })
 
 pokeball.addEventListener("click", (event) => {
@@ -13,13 +13,18 @@ pokeball.addEventListener("click", (event) => {
     pokeballDiv.classList.toggle("shrink")
     setTimeout(() => {
         pokeball.src = "pokeball.png"
-        pokeball.classList.toggle("ballAnimation")
+        pokeballDiv.remove()
+        setTimeout(() => {
+            pokeball.classList.toggle("ballAnimationIn")
+            pokeball.classList.toggle("ballAnimationOut")
+        }, 200)
     }, 700)
 })
 
 
-const pokemonSearchBar = document.getElementById("pokemonSearchInput")
 
+
+const pokemonSearchBar = document.getElementById("pokemonSearchInput")
 pokemonSearchBar.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
         fetchPokemon(pokemonSearchBar.value)
@@ -27,7 +32,16 @@ pokemonSearchBar.addEventListener("keydown", (event) => {
 })
 
 function handleError(error) {
-
+    console.log("reached error function")
+    const mainContent = document.querySelector("#mainPokemonContentsDiv")
+    const errorLabel = document.querySelector("#theErrorLabel")
+    if (typeof(errorLabel) === undefined || errorLabel === null) {
+        const newErrorLabel = document.createElement("h3")
+        newErrorLabel.id = "theErrorLabel"
+        newErrorLabel.classList.add("errorLabel")
+        newErrorLabel.innerHTML = "There doesn't appear to be a pokemon by that name :( Please Try Again"
+        mainContent.appendChild(newErrorLabel)
+    }
 }
 
 async function fetchPokemon(pokemonID) {
@@ -35,11 +49,15 @@ async function fetchPokemon(pokemonID) {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonID.toLowerCase()}`)
         const data = await response.json()
         console.log(data.forms[0].name)
+
+        const mainContent = document.querySelector("#mainPokemonContentsDiv")
+        const errorLabel = document.querySelector("#theErrorLabel")
+        if(typeof(errorLabel) !== undefined && errorLabel !== null) {
+            errorLabel.remove()
+        }
+
         designPokemonLayout(data)
     } catch (error) {
         handleError(error)
     }
 }
-
-
-fetchPokemon()
