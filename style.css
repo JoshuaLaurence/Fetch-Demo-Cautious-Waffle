@@ -111,8 +111,8 @@ body {
 
 #mainPokemonContentsDiv {
     width: 100%;
-    display: block;
-    height:inherit;
+    display:flex;
+    height: 100%;
     background-color: blueviolet;
     position: relative;
     text-align: center;
