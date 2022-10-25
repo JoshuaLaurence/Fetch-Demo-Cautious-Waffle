@@ -1,0 +1,11 @@
+#pokemonSearchDiv {
+    width: auto;
+    height: 200px;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+}
+
+#pokemonSearchInput {
+    position: absolute;
+}
