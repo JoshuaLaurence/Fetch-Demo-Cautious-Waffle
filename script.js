@@ -46,14 +46,9 @@ function handleError(error) {
     mainContent.appendChild(newErrorLabel)
 }
 
-async function fetchPokemon(pokemonID) {
-    try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonID.toLowerCase()}`)
-        const data = await response.json()
-        console.log(data.forms[0].name)
-
-        designPokemonLayout(data)
-    } catch (error) {
-        handleError(error)
-    }
+function fetchPokemon(pokemonID) {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonID.toLowerCase()}`)
+    .then(response => response.json())
+    .then(data => designPokemonLayout(data))
+    .catch(error => handleError(error))
 }

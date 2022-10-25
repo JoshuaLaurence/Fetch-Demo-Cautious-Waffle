@@ -1,12 +1,31 @@
 function designPokemonLayout(data) {
     //Sorting Data
+    console.log(data)
     const pokemonTitle = data.forms[0].name
     const listOfAbilites = retrieveAbilities(data.abilities)
-    const listOfGamesFeatured = retrieveListOfGames(data.games_indices)
+    const listOfGamesFeatured = retrieveListOfGames(data.game_indices)
     const listOfMoves = retrieveMoves(data.moves)
     const statistics = retrieveStatistics(data.stats)
     const types = retrieveTypes(data.types)
     const sprites = [data.sprites.back_default, data.sprites.front_default]
+
+    const player = document.createElement("img")
+    player.id = "player"
+    const mainContent = document.getElementById("mainPokemonContentsDiv")
+    player.src = "player.png"
+
+    const sprite = document.createElement("img")
+    sprite.id = "sprite"
+    sprite.src = data.sprites.other["official-artwork"].front_default
+
+    mainContent.appendChild(player)
+    mainContent.appendChild(sprite)
+    setTimeout(() => {
+        sprite.classList.toggle("moveSprite")
+        player.classList.toggle("movePlayer")
+    }, 50)
+    //Setting up the HTML elements
+
 
 }
 
@@ -48,5 +67,3 @@ function retrieveStatistics(stats) {
     }
     return tempArray
 }
-
-module.exports = designPokemonLayout
