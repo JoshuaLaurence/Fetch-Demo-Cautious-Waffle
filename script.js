@@ -28,10 +28,9 @@ const pokemonSearchBar = document.getElementById("pokemonSearchInput")
 pokemonSearchBar.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
         const mainContent = document.querySelector("#mainPokemonContentsDiv")
-        const errorLabel = document.querySelector("#theErrorLabel")
-        if(typeof(errorLabel) !== undefined && errorLabel !== null) {
-            errorLabel.remove()
-
+        const errorContent = document.querySelector("#errorDiv")
+        if(typeof(errorContent) !== undefined && errorContent !== null) {
+            errorContent.remove()
         }
 
         console.log("Items changing")
@@ -46,7 +45,7 @@ pokemonSearchBar.addEventListener("keydown", (event) => {
                 }
             }, 2000)
         } else {
-            fetchPokemon(pokemonSearchBar.value)d
+            fetchPokemon(pokemonSearchBar.value)
         }
     }
 })
@@ -54,17 +53,23 @@ pokemonSearchBar.addEventListener("keydown", (event) => {
 function handleError(error) {
     console.log("reached error function")
     const mainContent = document.querySelector("#mainPokemonContentsDiv")
+    const errorContent = document.createElement("div")
+    errorContent.id = "errorDiv"
     const newErrorLabel = document.createElement("h3")
     const newErrorImage = document.createElement("img")
     newErrorImage.id = "theErrorImage"
-    newErrorImage.src = `sadPokemon${Math.round(Math.random() * 3)}.png`
+    const randomID = Math.floor(Math.random() * 3)
+    console.log(randomID)
+    newErrorImage.src = `./sadPokemonImages/sadPokemon${randomID}.png`
 
     newErrorLabel.id = "theErrorLabel"
     newErrorLabel.classList.add("errorLabel")
     newErrorImage.classList.add("errorImage")
     newErrorLabel.innerHTML = "There doesn't appear to be a pokemon by that name :(<br>Please Try Again"
-    mainContent.appendChild(newErrorLabel)
-    mainContent.appendChild(newErrorImage)
+    errorContent.appendChild(newErrorLabel)
+    errorContent.appendChild(newErrorImage)
+
+    mainContent.appendChild(errorContent)
 }
 
 function fetchPokemon(pokemonID) {

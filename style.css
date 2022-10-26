@@ -123,13 +123,23 @@ body {
     margin: auto;
     background-color: antiquewhite;
     position: relative;
-    justify-content: center;
+    justify-content: space-between;
     align-content: center;
     overflow: scroll;
 }
 
+#errorDiv {
+    display: inline-block;
+    text-align: center;
+    align-content: space-around;
+    justify-content: space-around;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
 .errorImage {
-    width: 400px;
+    width: auto;
     height: 400px;
     position: absolute;
 }
@@ -138,10 +148,6 @@ body {
     text-align: center;
     width: auto;
     font-size: 20px;
-    right: 0;
-    left: 0;
-    top: 0;
-    bottom: 0;
     position: absolute;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color:grey;

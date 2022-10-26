@@ -10,16 +10,13 @@ function designPokemonLayout(data) {
     const sprites = [data.sprites.back_default, data.sprites.front_default]
     //Setting up the HTML elements
 
-    handlePlayerLogic()
-
-
-}
-
-function handlePlayerLogic() {
     const mainContent = document.getElementById("mainPokemonContentsDiv")
+
+    //Player and Sprite Logic
     const player = document.createElement("img")
     player.id = "player"
     player.src = "player.png"
+
     const sprite = document.createElement("img")
     sprite.id = "sprite"
     sprite.src = data.sprites.other["official-artwork"].front_default
@@ -30,7 +27,11 @@ function handlePlayerLogic() {
         sprite.classList.toggle("moveSprite")
         player.classList.toggle("movePlayer")
     }, 50)
+
+
+
 }
+
 
 function retrieveTypes(types) {
     const tempArray = []
