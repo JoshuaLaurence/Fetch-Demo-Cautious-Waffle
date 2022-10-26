@@ -8,12 +8,18 @@ function designPokemonLayout(data) {
     const statistics = retrieveStatistics(data.stats)
     const types = retrieveTypes(data.types)
     const sprites = [data.sprites.back_default, data.sprites.front_default]
+    //Setting up the HTML elements
 
+    handlePlayerLogic()
+
+
+}
+
+function handlePlayerLogic() {
+    const mainContent = document.getElementById("mainPokemonContentsDiv")
     const player = document.createElement("img")
     player.id = "player"
-    const mainContent = document.getElementById("mainPokemonContentsDiv")
     player.src = "player.png"
-
     const sprite = document.createElement("img")
     sprite.id = "sprite"
     sprite.src = data.sprites.other["official-artwork"].front_default
@@ -24,9 +30,6 @@ function designPokemonLayout(data) {
         sprite.classList.toggle("moveSprite")
         player.classList.toggle("movePlayer")
     }, 50)
-    //Setting up the HTML elements
-
-
 }
 
 function retrieveTypes(types) {
